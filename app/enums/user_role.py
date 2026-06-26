@@ -1,6 +1,6 @@
-from enum import ENUM
+from enum import Enum
 
-class UserRole(str, ENUM):
+class UserRole(str, Enum):
     STUDENT = "STUDENT"
     HR = "HR"
     TPO = "TPO"
