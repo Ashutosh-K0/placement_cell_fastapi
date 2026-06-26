@@ -1,4 +1,4 @@
-from app.database.database import engine
+from database import engine
 try:
     connection = engine.connect()
     print("Database Connected Successfully!")
