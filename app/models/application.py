@@ -1,10 +1,11 @@
-from sqlalchemy import Column, Integer, ForeignKey, func, DateTime, Enum
+from sqlalchemy import Column, Integer, ForeignKey, func, DateTime, Enum, UniqueConstraint
 from sqlalchemy.orm import relationship
 from app.database.database import Base
 from app.enums.application_status import ApplicationStatus
 
 class Application(Base):
     __tablename__ = 'applications'
+    __table_args__ = (UniqueConstraint("student_id","job_id",name="uq_student_job"),)
     id = Column(Integer, primary_key=True)
     student_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     job_id = Column(Integer, ForeignKey("jobs.id"), nullable=False, index=True)
