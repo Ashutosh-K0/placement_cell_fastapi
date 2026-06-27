@@ -11,3 +11,6 @@ class Resume(Base):
     is_primary = Column(Boolean, default=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
+
+    applications = relationship('Application', back_populates='resume')
+    user = relationship('User', back_populates='resumes',  foreign_keys=[student_id])

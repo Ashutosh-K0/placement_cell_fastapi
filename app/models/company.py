@@ -11,3 +11,6 @@ class Company(Base):
     website_url = Column(String(200), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate= func.now(), nullable=False)
+
+    jobs = relationship('Job', back_populates='company', foreign_keys="Job.company_id")
+    users = relationship('User', back_populates='company', foreign_keys="User.company_id")

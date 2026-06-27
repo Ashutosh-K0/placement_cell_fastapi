@@ -21,3 +21,8 @@ class Job(Base):
     application_deadline = Column(DateTime(timezone=True), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate= func.now(), nullable=False)
+
+    applications = relationship('Application', back_populates='job')
+    company = relationship('Company', back_populates='jobs')
+    created_by_hr = relationship('User', back_populates="created_jobs", foreign_keys=[created_by_hr_id])
+    approved_by_tpo = relationship('User', back_populates="approved_jobs", foreign_keys=[approved_by_tpo_id])

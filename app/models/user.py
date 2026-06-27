@@ -14,3 +14,11 @@ class User(Base):
     company_id = Column(Integer,ForeignKey("companies.id"),nullable=True)
     created_at = Column(DateTime(timezone=True), server_default= func.now(),nullable=False)
     updated_at = Column(DateTime(timezone=True),server_default=func.now(),onupdate=func.now(),nullable=False)
+
+    application_history = relationship('ApplicationHistory', back_populates='user')
+    resumes = relationship('Resume', back_populates='user')
+    company = relationship('Company', back_populates='users')
+    student_profile = relationship('StudentProfile', back_populates='user', uselist=False)
+    applications = relationship('Application', back_populates='user')
+    created_jobs = relationship('Job', back_populates='created_by_hr', foreign_keys="Job.created_by_hr_id")
+    approved_jobs = relationship('Job', back_populates='approved_by_tpo', foreign_keys="Job.approved_by_tpo_id")

@@ -13,3 +13,8 @@ class Application(Base):
     status = Column(Enum(ApplicationStatus), default=ApplicationStatus.APPLIED, index=True, nullable=False)
     applied_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
+
+    job = relationship('Job', back_populates='applications')
+    history = relationship('ApplicationHistory', back_populates='application')
+    resume = relationship('Resume', back_populates='applications')
+    user = relationship('User', back_populates='applications', foreign_keys=[student_id])

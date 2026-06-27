@@ -12,3 +12,6 @@ class ApplicationHistory(Base):
     new_status = Column(Enum(ApplicationStatus), nullable=False)
     notes = Column(Text, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    application = relationship('Application', back_populates='history')
+    user = relationship('User', back_populates='application_history', foreign_keys=[changed_by_user_id])
