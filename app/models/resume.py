@@ -14,3 +14,5 @@ class Resume(Base):
 
     applications = relationship('Application', back_populates='resume')
     user = relationship('User', back_populates='resumes',  foreign_keys=[student_id])
+
+    ##File path for the resume file in the storage system
